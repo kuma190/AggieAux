@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+# FURKAN ADDING
+# MacOS book-keeping files
+*.DS_Store
