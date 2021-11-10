@@ -17,6 +17,7 @@ document.querySelector('#userButton').onclick = () => {
     const text = document.querySelector('#enterUser').value;
     socket.emit('theUserName',text);
 }
+
 //sending a message
 document.querySelector('button').onclick = () => {
 
