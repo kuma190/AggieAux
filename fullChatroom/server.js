@@ -11,7 +11,7 @@ const io = socketio(server);
 
 
 //Set static folder
-app.use(express.static(path.join(_dirname,'public')));
+app.use(express.static(path.join(__dirname,'public')));
 
 const botName = "Reveille";
 
@@ -39,6 +39,12 @@ io.on('connection',socket => {
     //io.emit()
 
     //Listen for message sent by the client
+    socket.on('chatMessage', msg => {
+        const user = getCurrentUser(socket.id);
+        //Send to everybody
+        io.to(user.room).emit('message',formatMessage(user.username,msg));
+    });
+
     socket.on('disconnect', () => {
         const user = userLeave(socket.id);
 
