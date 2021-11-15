@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>AggieAux</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <div class = "chat-container">
+        <div class = "chat-main">
+            <div class = "chat-sidebar">
+                <h3>Room Name: </h3>
+                <h2 id= "room-name"></h2>
+                <h3>Users</h3>
+                <ul id = "users"></ul>
+            </div>
+            <div class = "chat-messages">
+
+            </div>
+        </div>
+        <div class ="chat-submit-container">
+            <form id="chat-form">
+                <input type="text"
+                    id = "msg"
+                    type = "text"
+                    placeholder = "Enter Message"
+                    required
+                    autocomplete = "off"
+                />
+                <button class = "btn">Send</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js" integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
