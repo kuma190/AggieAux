@@ -107,3 +107,6 @@ dist
 # FURKAN ADDING
 # MacOS book-keeping files
 *.DS_Store
+
+# AggieAux/lyrics/config.py holds API keys (DO NOT UPLOAD THIS FILE TO GITHUB)
+config.py
