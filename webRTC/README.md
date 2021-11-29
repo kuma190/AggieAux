@@ -15,8 +15,10 @@ Start the application using Node:
 npm install
 
 # Run the server
-node server
+nodemon server 
 ```
+#U can also do
+node server
 
 Start the application using Docker:
 
