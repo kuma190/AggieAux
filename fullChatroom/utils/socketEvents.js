@@ -33,11 +33,25 @@ exports.socketEvents = async (client,server) => {
         server.to(user.room).emit('message',formatMessage(user.username,msg));
     });
 
-    client.on('videoMessage', (state) => {
+    // client.on('videoMessage', (state) => {
+    //     const user = getCurrentUser(client.id);
+    //     server.to(user.room).emit('videoMessage', state.state);
+    //     });
+    
+    client.on('playbackState', (state) => {
         const user = getCurrentUser(client.id);
-        server.to(user.room).emit('videoMessage', state.state);
-        });
+        server.to(user.room).emit('playbackState', state.state);
+    });
 
+    client.on('seekEvent', (seekValue) => {
+        const user = getCurrentUser(client.id);
+        server.to(user.room).emit('seekEvent', seekValue);
+    });
+
+    client.on('videoRequest', (vidLink) => {
+        const user = getCurrentUser(client.id);
+        server.to(user.room).emit('videoRequest', vidLink);
+    });
     
 
     client.on('disconnect', () => {
@@ -45,14 +59,11 @@ exports.socketEvents = async (client,server) => {
 
         if (user) {
             server.to(user.room).emit('message',formatMessage(botName,`${user.username} just dipped. F.`));
-
+            server.to(user.room).emit('roomUsers', {
+                room: user.room,
+                users: getRoomUsers(user.room)
+            });
         }
-
-        //Send list of users and room info when a new user joins to update info
-        server.to(user.room).emit('roomUsers', {
-            room: user.room,
-            users: getRoomUsers(user.room)
-        });
     });
 
 };
