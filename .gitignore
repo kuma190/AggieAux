@@ -111,3 +111,7 @@ dist
 # AggieAux/lyrics/config.py holds API keys (DO NOT UPLOAD THIS FILE TO GITHUB)
 config.py
 *__pycache__*
+
+
+# API KEYS
+*.config
