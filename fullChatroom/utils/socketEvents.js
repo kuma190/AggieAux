@@ -7,6 +7,8 @@ const botName = "Reveille";
 exports.socketEvents = async (client,server) => {
     client.on('joinRoom', ({username,room}) => {
 
+        //client = socket.io client api
+        //server = socket.io server api
         const user = userJoin(client.id,username,room);
         client.join(user.room);
 
@@ -53,6 +55,13 @@ exports.socketEvents = async (client,server) => {
         server.to(user.room).emit('videoRequest', vidLink);
     });
     
+    client.on('broadcaster', () => {
+        console.log("Hello world");
+    })
+
+    client.on('watcher', (roomName) => {
+        console.log("hello world");
+    })
 
     client.on('disconnect', () => {
         const user = userLeave(client.id);
