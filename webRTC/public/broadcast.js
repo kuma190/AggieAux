@@ -6,7 +6,7 @@ const config = {
       "urls": "stun:stun.l.google.com:19302",
     },
     { 
-      "urls": "turn:3.12.34.87:3478?transport=tcp",
+      "urls": "turn:3.12.34.87:3478",
       "username": "root",
       "credential": "user"
     }
