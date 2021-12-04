@@ -1,11 +1,13 @@
-.chat-container{
-    background-color:#000000;
+
+  video {
+    width: 400px;
+    height: 400px;
   }
-  
-  .chat-sidebar{
-    color: white;
+
+  .room-name-container { 
+    display: flex;
   }
-  
-  .chat-messages{
-    color: white;
+
+  #room-name {
+    padding-left: 10px;
   }

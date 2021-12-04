@@ -2,8 +2,8 @@ const users = [];
 
 
 //Add new user to list of users
-function userJoin(id,username,room) {
-    const user = {id,username,room};
+function userJoin(id,username,room,isBroadcaster) {
+    const user = {id,username,room,isBroadcaster};
 
     users.push(user);
 
@@ -20,6 +20,9 @@ function userLeave(id) {
     const index = users.findIndex(user => user.id === id);
 
     if (index !== -1) {
+        if (users.at(index).isBroadcaster) {
+            console.log("Broadcaster is leaving");
+        }
         return users.splice(index,1)[0];
     }
 }
@@ -28,6 +31,7 @@ function userLeave(id) {
 function getRoomUsers(room) {
     return users.filter(user=> user.room === room);
 }
+
 
 module.exports = {
     userJoin,
