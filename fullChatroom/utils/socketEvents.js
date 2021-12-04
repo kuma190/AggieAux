@@ -69,7 +69,7 @@ exports.socketEvents = async (client,server) => {
 
         if (currUsers.length != 0) {
             currUsers.filter(user => user.isBroadcaster == true);
-            client.to(currUsers.at(0).id).emit("watcher",client.id);
+            client.to(currUsers[0].id).emit("watcher",client.id);
         }
     });
 
