@@ -58,10 +58,7 @@ socket.on("candidate", (id, candidate) => {
 });
 
 async function getRoomNo(){
-  roomNo = document.getElementById("roomNo").value
-  console.log("getRoom", roomNo)
-  
-    socket.emit("watcher",roomNo);
+    socket.emit("watcher");
 }
 
 

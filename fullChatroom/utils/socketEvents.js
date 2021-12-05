@@ -63,9 +63,9 @@ exports.socketEvents = async (client,server) => {
         console.log("Hello world1");
     })
 
-    client.on('watcher', (roomName) => {
+    client.on('watcher', () => {
         console.log("hello world2");
-        var currUsers = getRoomUsers(roomName);
+        var currUsers = getRoomUsers(getCurrentUser(client.id).room);
 
         if (currUsers.length != 0) {
             currUsers.filter(user => user.isBroadcaster == true);
