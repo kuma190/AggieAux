@@ -6,7 +6,7 @@ function userJoin(id,username,room,isBroadcaster) {
     const user = {id,username,room,isBroadcaster};
 
     users.push(user);
-
+    console.log(users)
     return user;
 }
 
@@ -23,6 +23,7 @@ function userLeave(id) {
         if (users[index].isBroadcaster) {
             console.log("Broadcaster is leaving");
         }
+        console.log(users)
         return users.splice(index,1)[0];
     }
 }
@@ -32,10 +33,21 @@ function getRoomUsers(room) {
     return users.filter(user=> user.room === room);
 }
 
+function getRooms(){
+    broadcasters = users.filter(user => user.isBroadcaster === true)
+    roomArray = []
+    for (i of broadcasters){
+        //console.log(i)
+        roomArray.push(i.room)
+    }
+    return roomArray
+}
+
 
 module.exports = {
     userJoin,
     getCurrentUser,
     userLeave,
-    getRoomUsers
+    getRoomUsers,
+    getRooms
 }
