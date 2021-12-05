@@ -7,9 +7,23 @@ const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 
 //Get username and room from URL
-const {username, room } = Qs.parse(location.search, {
+//if newRoom is defined, it means newRoom is being created. if room is defined, room is being joined
+let {username, room, newRoom,usernameBC } = Qs.parse(location.search, {
     ignoreQueryPrefix: true
 });
+
+console.log(username,room,newRoom)
+
+
+if (room == undefined){
+    room = newRoom
+}
+console.log("Room",room)
+
+if (username == undefined){
+    username = usernameBC
+}
+console.log("Username",username)
 
 //Join chatroom
 
@@ -18,6 +32,7 @@ socket.emit('joinRoom', {username,room,isBroadcaster});
 
 //Get room and users
 socket.on('roomUsers', ({room,users}) => {
+    console.log('roomusers',room,users)
     outputRoomName(room);
     outputUsers(users);
 });

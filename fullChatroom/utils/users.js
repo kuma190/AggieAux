@@ -10,6 +10,13 @@ function userJoin(id,username,room,isBroadcaster) {
     return user;
 }
 
+function getUsernames(){
+    userArray = []
+    for (i of users){
+        userArray.push(i.username)
+    }
+    return userArray;
+}
 //Get current user
 function getCurrentUser(id) {
     //reminds me of haskell :D
@@ -49,5 +56,6 @@ module.exports = {
     getCurrentUser,
     userLeave,
     getRoomUsers,
-    getRooms
+    getRooms,
+    getUsernames
 }

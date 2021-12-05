@@ -1,12 +1,12 @@
 const formatMessage = require('./messages');
-const {userJoin,getCurrentUser,userLeave,getRoomUsers,getRooms} = require('./users');
+const {userJoin,getCurrentUser,userLeave,getRoomUsers,getRooms,getUsernames} = require('./users');
 
 
 const botName = "Reveille";
 
 exports.socketEvents = async (client,server) => {
     client.on('joinRoom', ({username,room,isBroadcaster}) => {
-
+        console.log(username,room,isBroadcaster)
         //First user to join room becomes the broadcaster
         
         //client = socket.io client api
@@ -17,6 +17,7 @@ exports.socketEvents = async (client,server) => {
         }
         const user = userJoin(client.id,username,room,isBroadcaster);
         client.join(user.room);
+        server.emit("usersChange",getUsernames())
 
         //Welcome new user
         client.emit('message',formatMessage(botName,'Welcome to Aggie Aux!'));
@@ -35,6 +36,15 @@ exports.socketEvents = async (client,server) => {
 
        
     });
+    client.on('requestRooms',()=>{
+        console.log("requestRooms")
+        server.emit("newRoom",getRooms())
+    })
+
+    client.on('requestRoomsAndUsers',()=>{
+        console.log('requestRoomsAndUsers')
+        server.emit('currentRoomsAndUsers',getRooms(),getUsernames())
+    })
 
     //Use this to send a mesage to ALL clients
     //server.emit()
@@ -94,10 +104,11 @@ exports.socketEvents = async (client,server) => {
     });
 
     client.on('disconnect', () => {
+        let broadcasterleaving = false;
         let theUserLeaving = getCurrentUser(client.id);
         if (theUserLeaving != undefined) {
             if (theUserLeaving.isBroadcaster == true){
-                server.emit("newRoom",getRooms())
+                broadcasterleaving = true
             }
             else{
             let listUsers = getRoomUsers(theUserLeaving.room);
@@ -107,6 +118,11 @@ exports.socketEvents = async (client,server) => {
         }
 
         const user = userLeave(client.id);
+        server.emit("usersChange",getUsernames())
+
+        if (broadcasterleaving){
+            server.emit("newRoom",getRooms())
+        }
 
         if (user) {
             server.to(user.room).emit('message',formatMessage(botName,`${user.username} just dipped. F.`));

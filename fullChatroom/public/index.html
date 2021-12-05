@@ -38,7 +38,7 @@
                         <h2>
                             Let's vibe!
                         </h2>
-                        <form action="party.html" target = "_blank" class = "mt-3" id = "chatRoomRedirect">
+                        <form onsubmit = "return checkUniqueUser()" action="party.html" target = "_blank" class = "mt-3" id = "chatRoomRedirect">
                             <div class= "user-form">
                                 <label for="username"></label>
                                 <input 
@@ -62,13 +62,13 @@
                         <button type = "submit" target = "_blank" class ="btn btn-light mt-3">Join Room</button>
                         
                         </form>
-                        <form action="partybroadcaster.html" class = "mt-3" id = "chatRoomRedirect">
+                        <form onsubmit = "return checkUniqueRoomAndBroadcaster()" action="partybroadcaster.html" class = "mt-3" id = "chatRoomRedirect">
                             <div class= "user-form">
                                 <label for="username"></label>
                                 <input 
                                     type="text"
-                                    name="username"
-                                    id= "username"
+                                    name="usernameBC"
+                                    id= "usernameBC"
                                     placeholder="What's your name?"
                                     required
                                 />
@@ -78,8 +78,8 @@
                                     <label for="RoomName"></label>
                                 <input 
                                     type="text"
-                                    name="room"
-                                    id= "room"
+                                    name="newRoom"
+                                    id= "newRoom"
                                     placeholder="Room Name?"
                                 />
                                 <button  type = "submit" id = "createRoom" class ="btn btn-light mt-3">Create Room</button>
