@@ -9,8 +9,11 @@ body {
   height: 100vh;
   position: relative;
 }
-
+  /* .row {
+    height: 40%;
+  } */
   video {
+    /* background-color: black; */
     width: 400px;
     height: 400px;
   }
