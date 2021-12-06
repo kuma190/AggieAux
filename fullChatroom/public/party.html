@@ -25,7 +25,7 @@
         </div>
     </nav>
     <div class = "row">
-        <div class = "first-col col-sm-2">
+        <div class = "first-col col-sm-3">
             <div class = "chat-sidebar">
                 <div class = "room-name-container">
                     <h3>Room Name: </h3>
@@ -34,6 +34,15 @@
                 <h3>Users</h3>
                 <ul id = "users"></ul>
             </div>
+            
+        
+            <section>
+                <div class="container" id="lyrics-result">
+                    <p>Enter song or artist in the field above</p>
+                </div>
+            </section>
+            <script src="lyrics/getLyrics.js"></script>
+            <!-- Lyrics END -->
         </div>
         <div class = "col-sm">
             <div class = "container-fluid">
@@ -57,7 +66,7 @@
                 </div>
 
                 <!-- Lyrics (should appear under video) -->
-                <header>
+                <!-- <header>
                     <div class="container">
                         <h1>Lyrics Search</h1>
                         <form id="lyrics" autocomplete="off">
@@ -72,7 +81,9 @@
                         <p>Enter song or artist in the field above</p>
                     </div>
                 </section>
-                <script src="lyrics/getLyrics.js"></script>
+                <script src="lyrics/getLyrics.js"></script> -->
+                <!-- Lyrics END -->
+
             </div>
         </div>
         <div class = "col-sm">
@@ -99,24 +110,37 @@
         </div>
         
     </div>
-<<<<<<< HEAD
-    
-    <video playsinline autoplay muted></video>
-    <button id="enable-audio">Enable audio</button>
-    <button id = "roomNoBut" onclick = "getRoomNo()">Connect to broadcaster</button>
-=======
     <div class = "row">
         <div class = "col">
             <video playsinline autoplay muted></video>
         </div>
     </div>
     <div class = "row">
+        
+        <div class = "col-sm-1">
+            <!-- <header> -->
+                <div class="container">
+                    <h1>Lyrics Search</h1>
+                    <form id="lyrics" autocomplete="off">
+                        <input type="text" id="lyrics-search" placeholder="Search for song or artist">
+                        <button>Search</button>
+                    </form>
+                </div>
+            <!-- </header> -->
+        
+            <section>
+                <div class="container" id="lyrics-result">
+                    <p>Enter song or artist in the field above</p>
+                </div>
+            </section>
+            <script src="lyrics/getLyrics.js"></script>
+        </div>
+
         <div class = "col">
             <button id="enable-audio">Enable audio</button>
             <button id = "roomNoBut" onclick = "getRoomNo()">Connect to broadcaster</button>
         </div>
     </div>
->>>>>>> 5b867ddea3f6dfe89c1a6b251872684208e02932
     <script src="js/player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js" integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
