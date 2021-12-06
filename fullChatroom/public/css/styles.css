@@ -11,3 +11,19 @@
   #room-name {
     padding-left: 10px;
   }
+
+  /* *{
+    background-color: rgba(80, 0, 0,.6);
+    color: white;
+
+   } */
+
+
+  .overflow-auto{
+    height: 50vh;
+    width: 50vh;
+  }
+  .chat-container {
+    float: right;
+  }
+  

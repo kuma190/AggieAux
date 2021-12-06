@@ -7,9 +7,21 @@ const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 
 //Get username and room from URL
-const {username, room } = Qs.parse(location.search, {
+let {username, room, newRoom,usernameBC } = Qs.parse(location.search, {
     ignoreQueryPrefix: true
 });
+
+
+if (room == undefined) {
+    room = newRoom;
+}
+console.log("Room",room);
+
+if (username == undefined){
+    username = usernameBC
+}
+console.log("Username",username)
+
 
 //Join chatroom
 

@@ -16,7 +16,24 @@
     <title>AggieAux</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style = "background-color: #500000;">
+        <div class="container">
+            <a href="" class="navbar-brand">
+                <img src="img/spongebobDJ.jpeg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                AggieAux</a>
+        </div>
+    </nav>
     <div class = "row">
+        <div class = "col-md">
+            <div class = "chat-sidebar">
+                <div class = "room-name-container">
+                    <h3>Room Name: </h3>
+                    <h3 id= "room-name"></h3>                           
+                </div>
+                <h3>Users</h3>
+                <ul id = "users"></ul>
+            </div>
+        </div>
         <div class = "col-md">
             <div class = "container-fluid">
                 <div id="player"></div>
@@ -43,15 +60,7 @@
             <div class = "container-fluid">
                 <div class = "chat-container">
                     <div class = "chat-main">
-                        <div class = "chat-sidebar">
-                            <div class = "room-name-container">
-                                <h3>Room Name: </h3>
-                                <h3 id= "room-name"></h3>                           
-                            </div>
-                            <h3>Users</h3>
-                            <ul id = "users"></ul>
-                        </div>
-                        <div class = "chat-messages">
+                        <div class = " chat-messages overflow-auto">
                         </div>
                     </div>
                     <div class ="chat-submit-container">

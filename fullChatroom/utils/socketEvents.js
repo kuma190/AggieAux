@@ -1,10 +1,11 @@
 const formatMessage = require('./messages');
-const {userJoin,getCurrentUser,userLeave,getRoomUsers,getRooms} = require('./users');
+const {userJoin,getCurrentUser,userLeave,getRoomUsers,getRooms, getUsernames} = require('./users');
 
 
 const botName = "Reveille";
 
 exports.socketEvents = async (client,server) => {
+    
     client.on('joinRoom', ({username,room,isBroadcaster}) => {
 
         //First user to join room becomes the broadcaster
@@ -15,6 +16,8 @@ exports.socketEvents = async (client,server) => {
         //server = socket.io server api
         const user = userJoin(client.id,username,room,isBroadcaster);
         client.join(user.room);
+        server.emit("usersChange",getUsernames());
+        console.log(getUsernames());
 
         //Welcome new user
         client.emit('message',formatMessage(botName,'Welcome to Aggie Aux!'));
@@ -36,6 +39,8 @@ exports.socketEvents = async (client,server) => {
     client.on('roomRequest', () => {
         server.emit("newRoom",getRooms());
     });
+
+    
 
     //Use this to send a mesage to ALL clients
     //server.emit()
@@ -98,7 +103,7 @@ exports.socketEvents = async (client,server) => {
         let theUserLeaving = getCurrentUser(client.id);
         if (theUserLeaving != undefined) {
             if (theUserLeaving.isBroadcaster == true) {
-                server.emit("newRoom",getRooms());
+                // server.emit("newRoom",getRooms());
             } else {
                 let listUsers = getRoomUsers(theUserLeaving.room);
                 let theBroadcaster = listUsers.find(theUserLeaving => ((theUserLeaving.isBroadcaster == true)));
@@ -109,6 +114,7 @@ exports.socketEvents = async (client,server) => {
         const user = userLeave(client.id);
 
         if (user) {
+            server.emit("usersChange",getUsernames());
             if (user.isBroadcaster) {
                 server.emit("newRoom",getRooms());
             } else {
