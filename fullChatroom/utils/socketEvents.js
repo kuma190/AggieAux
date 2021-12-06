@@ -5,7 +5,7 @@ const {userJoin,getCurrentUser,userLeave,getRoomUsers,getRooms, getUsernames} = 
 const botName = "Reveille";
 
 exports.socketEvents = async (client,server) => {
-    
+    server.emit("usersChange",getUsernames());
     client.on('joinRoom', ({username,room,isBroadcaster}) => {
 
         //First user to join room becomes the broadcaster
@@ -43,6 +43,7 @@ exports.socketEvents = async (client,server) => {
     
 
     //Use this to send a mesage to ALL clients
+    //testing101
     //server.emit()
 
     //Listen for message sent by the client
