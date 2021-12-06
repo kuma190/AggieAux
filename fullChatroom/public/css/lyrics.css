@@ -5,7 +5,8 @@
     --white: #fff;
     --black: #1c2b2d;
     --blue: #31326f;
-    --color-primary: #9d0191;
+    /* --color-primary: #9d0191; */
+    --color-primary: #500000;
     --color-sec: #db6400;
     --color-grey: #eee;
     --color-dark-grey: #222831;
@@ -74,6 +75,21 @@ img {
     border-radius: 2rem;
     margin-bottom: 2rem;
 }
+  #lyrics input{
+      width: 75%;
+  }
+
+  #lyrics-top-container{
+      font-size: 12pt;
+      border-radius: 2rem;
+      border-color: #1c2b2d;
+      margin-top: 1em;
+      background-color: rgb(194, 185, 185);
+  }
+
+  #lyrics-result {
+      /* float: right; */
+  }
 
 header h1 {
     font-size: 10rem;
@@ -120,13 +136,15 @@ section .container {
 }
 
 .songs {
-    width: 70%;
+    color: white;
+    width: 95%;
     list-style: none;
     margin:0 auto;
     padding: 2rem 0;
 }
 
 .songs li {
+    float: right;
     font-size: 1.4rem;
     text-align: center;
     display: flex;

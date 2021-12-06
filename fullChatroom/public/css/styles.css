@@ -45,14 +45,14 @@ body {
   } */
 
  .first-col {
-   background-color: rgba(80, 0, 0, 0.5);
    margin-left: 2vh;
  }
 
  .chat-sidebar{
+   height: 125px;
    margin-top: 1vh;
    border: 6px solid;
    border-radius: 1em;
-   border-color: rgba(80, 59, 0, 0.6);
+   border-color: rgba(15, 55, 114, 0.5);
    background-color: rgba(red, green, blue, alpha);
  }

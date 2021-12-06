@@ -1,151 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script
-    src=" https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
-    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
-    crossorigin="anonymous"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/lyrics.css">
     <title>AggieAux</title>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style = "background-color: #500000;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #500000;">
         <div class="container">
             <a href="" class="navbar-brand">
                 <img src="img/spongebobDJ.jpeg" alt="" width="30" height="24" class="d-inline-block align-text-top">
                 AggieAux</a>
         </div>
     </nav>
-    <div class = "row">
-        <div class = "first-col col-sm-3">
-            <div class = "chat-sidebar">
-                <div class = "room-name-container">
+    <div class="row">
+        <div class="first-col col-sm-3">
+            <div class="chat-sidebar overflow-auto">
+                <div class="room-name-container">
                     <h3>Room Name: </h3>
-                    <h3 id= "room-name"></h3>                           
+                    <h3 id="room-name"></h3>
                 </div>
                 <h3>Users</h3>
-                <ul id = "users"></ul>
+                <ul id="users"></ul>
             </div>
-            
-        
-            <section>
-                <div class="container" id="lyrics-result">
-                    <p>Enter song or artist in the field above</p>
-                </div>
-            </section>
-            <script src="lyrics/getLyrics.js"></script>
-            <!-- Lyrics END -->
-        </div>
-        <div class = "col-sm">
-            <div class = "container-fluid">
-                <div id="player"></div>
-                <div id = "video-controls">
-                    <i id = "play" style = "cursor: pointer;" class = "bi bi-play-fill" style = "font-size: 5rem;"></i>
-                    <i id = "pause" style = "cursor: pointer;" class = "bi bi-pause-fill" style = "font-size: 5rem;"></i>
-                    <input id="progress-bar" type="range" style="width: 300px;">
-                    <span id="current-time"></span>
-                    <span id="duration"></span>
-                    <form id="video-request">
-                        <input type="text"
-                            id = "vidRequest"
-                            type = "text"
-                            placeholder = "Enter Youtube Link"
-                            required
-                            autocomplete = "off"
-                        />
-                        <button class = "btn" id ="vidSend">Send</button>
-                    </form>
-                </div>
 
-                <!-- Lyrics (should appear under video) -->
-                <!-- <header>
-                    <div class="container">
-                        <h1>Lyrics Search</h1>
-                        <form id="lyrics" autocomplete="off">
-                            <input type="text" id="lyrics-search" placeholder="Search for song or artist">
-                            <button>Search</button>
-                        </form>
-                    </div>
-                </header>
-            
-                <section>
-                    <div class="container" id="lyrics-result">
-                        <p>Enter song or artist in the field above</p>
-                    </div>
-                </section>
-                <script src="lyrics/getLyrics.js"></script> -->
-                <!-- Lyrics END -->
-
-            </div>
-        </div>
-        <div class = "col-sm">
-            <div class = "container-fluid">
-                <div class = "chat-container">
-                    <div class = "chat-main">
-                        <div class = " chat-messages overflow-auto">
-                        </div>
-                    </div>
-                    <div class ="chat-submit-container">
-                        <form id="chat-form">
-                            <input type="text"
-                                id = "msg"
-                                type = "text"
-                                placeholder = "Enter Message"
-                                required
-                                autocomplete = "off"
-                            />
-                            <button class = "btn">Send</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-    <div class = "row">
-        <div class = "col">
-            <video playsinline autoplay muted></video>
-        </div>
-    </div>
-    <div class = "row">
-        
-        <div class = "col-sm-1">
-            <!-- <header> -->
-                <div class="container">
-                    <h1>Lyrics Search</h1>
+            <!-- <div class="container"> -->
+                <!-- LYRICS -->
+                <div class="container" id="lyrics-top-container">
+                    Lyrics Search
                     <form id="lyrics" autocomplete="off">
                         <input type="text" id="lyrics-search" placeholder="Search for song or artist">
                         <button>Search</button>
                     </form>
+                    <div class="container overflow-auto" id="lyrics-result">
+                        <p>Enter song or artist in the field above</p>
+                        <script src="lyrics/getLyrics.js"></script>
+                    </div>
                 </div>
-            <!-- </header> -->
-        
-            <section>
-                <div class="container" id="lyrics-result">
-                    <p>Enter song or artist in the field above</p>
+                    
+                    <section>
+                        <div class="container overflow-auto right" id="lyrics-result">
+                            <p>Enter song or artist in the field above</p>
+                            <script src="lyrics/getLyrics.js"></script>
+                        </div>
+                    </section>
+                    
+               
+            <!-- </div> -->
+
+        </div>
+        <div class="col-sm">
+            <div class="container-fluid">
+                <div id="player"></div>
+                <div id="video-controls">
+                    <i id="play" style="cursor: pointer;" class="bi bi-play-fill" style="font-size: 5rem;"></i>
+                    <i id="pause" style="cursor: pointer;" class="bi bi-pause-fill" style="font-size: 5rem;"></i>
+                    <input id="progress-bar" type="range" style="width: 300px;">
+                    <span id="current-time"></span>
+                    <span id="duration"></span>
+                    <form id="video-request">
+                        <input type="text" id="vidRequest" type="text" placeholder="Enter Youtube Link" required
+                            autocomplete="off" />
+                        <button class="btn" id="vidSend">Send</button>
+                    </form>
                 </div>
-            </section>
-            <script src="lyrics/getLyrics.js"></script>
+
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="container-fluid">
+                <div class="chat-container">
+                    <div class="chat-main">
+                        <div class=" chat-messages overflow-auto">
+                        </div>
+                    </div>
+                    <div class="chat-submit-container">
+                        <form id="chat-form">
+                            <input type="text" id="msg" type="text" placeholder="Enter Message" required
+                                autocomplete="off" />
+                            <button class="btn">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class = "col">
+    </div>
+    <div class="row">
+
+        <div class="col">
             <button id="enable-audio">Enable audio</button>
-            <button id = "roomNoBut" onclick = "getRoomNo()">Connect to broadcaster</button>
+            <button id="roomNoBut" onclick="getRoomNo()">Connect to broadcaster</button>
         </div>
     </div>
     <script src="js/player.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js" integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js"
+        integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script src="js/main.js"></script>
     <script src="js/watch.js"></script>
 </body>
+
 </html>

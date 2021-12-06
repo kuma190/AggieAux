@@ -27,7 +27,7 @@ async function beginSearch(searchValue) {
 // Display Search Result
 function displayData(data) {
     result.innerHTML = `
-    <ul class="songs">
+    <ul class="songs right">
       ${data.data
         .map(song=> `<li>
                     <div>
