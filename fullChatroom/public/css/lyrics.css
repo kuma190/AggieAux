@@ -17,12 +17,12 @@
     box-sizing: border-box;
 }
 
-/* html {
-    font-size: 10px;
+html {
+    font-size: 12px;
     margin: 0 auto;
-} */
+}
 
-/* body {
+body {
     font-family: 'Open Sans', sans-serif;
     background: url(./images/mysic.jpg) no-repeat center;
     background-size: cover;
@@ -43,7 +43,7 @@ body::after {
     z-index: -1;
     transform: translateX(-50%);
     
-} */
+}
 
 /* UTILITY */
 .p-small {
@@ -83,7 +83,7 @@ header .container{
 }
 
 header h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #fff;
     padding-bottom: 1rem;
 }
@@ -98,7 +98,7 @@ form button {
 }
 form input {
     width: 50%;
-    border-radius: 1rem 0 1rem 0;
+    border-radius: 1rem 1rem 1rem 1rem;
     margin-right: 3px;
     border-bottom: 3px solid var(--color-primary);
 }
