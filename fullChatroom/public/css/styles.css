@@ -1,5 +1,19 @@
 
+  
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: url(./images/mysic.jpg) no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: antiquewhite;
+  height: 100vh;
+  position: relative;
+}
+  /* .row {
+    height: 40%;
+  } */
   video {
+    /* background-color: black; */
     width: 400px;
     height: 400px;
   }
@@ -26,3 +40,22 @@
   .chat-container {
     float: right;
   }
+/*   
+  .lyrics-container {
+    background-color: black;
+    background-color: rgba(80, 0, 0,.6);
+
+  } */
+
+ .first-col {
+   margin-left: 2vh;
+ }
+
+ .chat-sidebar{
+   height: 125px;
+   margin-top: 1vh;
+   border: 6px solid;
+   border-radius: 1em;
+   border-color: rgba(15, 55, 114, 0.5);
+   background-color: rgba(red, green, blue, alpha);
+ }
