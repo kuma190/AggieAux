@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/lyrics.css">
     <title>AggieAux</title>
 </head>
 <body>
@@ -54,6 +55,24 @@
                         <button class = "btn" id ="vidSend">Send</button>
                     </form>
                 </div>
+
+                <!-- Lyrics (should appear under video) -->
+                <header>
+                    <div class="lyrics-container">
+                        <h1>Lyrics Search</h1>
+                        <form id="lyrics" autocomplete="off">
+                            <input type="text" id="lyrics-search" placeholder="Search for song or artist">
+                            <button>Search</button>
+                        </form>
+                    </div>
+                </header>
+            
+                <section>
+                    <div class="container" id="lyrics-result">
+                        <p>Enter song or artist in the field above</p>
+                    </div>
+                </section>
+                <script src="lyrics/getLyrics.js"></script>
             </div>
         </div>
         <div class = "col-md">
@@ -78,7 +97,9 @@
                 </div>
             </div>
         </div>
+        
     </div>
+    
     <video playsinline autoplay muted></video>
     <button id="enable-audio">Enable audio</button>
     <button id = "roomNoBut" onclick = "getRoomNo()">Connect to broadcaster</button>
