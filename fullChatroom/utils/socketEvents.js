@@ -93,12 +93,33 @@ exports.socketEvents = async (client,server) => {
         
     });
 
+    client.on('seekReady',()=>{
+        user = getCurrentUser(client.id);
+        broadcaster = null
+        if (!user.isBroadcaster){
+            broadcaster = getUserBroadcaster(user)
+            if (broadcaster){
+            //console.log("Bvid broadcaster",broadcaster.username)
+            server.to(broadcaster.id).emit("seekReady", user);
+            }
+        }
+        
+    });
+
     client.on('gotBvid',(user,videoId,timestamp)=>{
         console.log(videoId)
         //server.to(user.id).emit('videoRequest',videoId)
-        timestamp = Number(timestamp+Number(0))
+        //timestamp = Number(timestamp+Number(0))
         console.log(timestamp)
         server.to(user.id).emit('loadVideoAndTime',videoId,timestamp)
+    })
+
+    client.on('gotSeek',(user,timestamp)=>{
+        //console.log(videoId)
+        //server.to(user.id).emit('videoRequest',videoId)
+        //timestamp = Number(timestamp+Number(0))
+        //console.log(timestamp)
+        server.to(user.id).emit('seekEvent',timestamp)
     })
     
     client.on('broadcaster', () => {

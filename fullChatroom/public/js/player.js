@@ -173,6 +173,14 @@ socket.on('loadVideoAndTime',(vidLink,timestamp)=>{
    console.log(vidLink,timestamp)
   player.loadVideoById(vidLink,timestamp)
   //player.seekTo(timestamp)
+  //progressBar.max = player.getDuration()
+    
+    setTimeout(function(){ 
+      console.log('sleep 500',Number(progressBar.value) + Number(0),player.getDuration()); 
+      //socket.emit('seekEvent',Number(progressBar.value) + Number(0));
+      socket.emit('seekEvent',timestamp+0.5);
+      //socket.emit("seekReady") //this tries to get a timestamp from broadcaster after user video is laoded, but the sync is eh
+  }, 750); 
   //socket.emit('seekEvent',Number(timestamp) + Number(0));
 
 })
@@ -181,8 +189,19 @@ socket.on('getBvid',(user)=>{
   console.log(user.username)
   videoUrl = player.getVideoUrl()
   //timestamp = Number(progressBar.value) + Number (0)
-  timestamp = player.getCurrentTime()
+  timestamp = Number(progressBar.value)+Number(0)
   console.log(timestamp)
   console.log(videoUrl)
   socket.emit("gotBvid",user,videoUrl,timestamp)
+})
+
+//not used unless seekready is called above
+socket.on('seekReady',(user)=>{
+  console.log(user.username)
+  //videoUrl = player.getVideoUrl()
+  //timestamp = Number(progressBar.value) + Number (0)
+  timestamp = Number(progressBar.value) + Number(0)
+  //console.log(timestamp)
+  //console.log(videoUrl)
+  socket.emit("gotSeek",user,timestamp)
 })
