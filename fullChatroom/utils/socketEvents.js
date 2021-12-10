@@ -1,5 +1,5 @@
 const formatMessage = require('./messages');
-const {userJoin,getCurrentUser,userLeave,getRoomUsers,getRooms, getUsernames} = require('./users');
+const {userJoin,getCurrentUser,userLeave,getRoomUsers,getRooms, getUsernames,getUserBroadcaster} = require('./users');
 
 
 const botName = "Reveille";
@@ -60,18 +60,46 @@ exports.socketEvents = async (client,server) => {
     
     client.on('playbackState', (state) => {
         const user = getCurrentUser(client.id);
-        server.to(user.room).emit('playbackState', state.state);
+        if (user){
+            server.to(user.room).emit('playbackState', state.state);
+        }
     });
 
     client.on('seekEvent', (seekValue) => {
+        console.log('seekevent',seekValue)
         const user = getCurrentUser(client.id);
-        server.to(user.room).emit('seekEvent', seekValue);
+        if (user){
+            server.to(user.room).emit('seekEvent', seekValue);
+        }
     });
 
     client.on('videoRequest', (vidLink) => {
         const user = getCurrentUser(client.id);
-        server.to(user.room).emit('videoRequest', vidLink);
+        if (user){
+            server.to(user.room).emit('videoRequest', vidLink);
+        }
     });
+
+    client.on('getBvid',()=>{
+        user = getCurrentUser(client.id);
+        broadcaster = null
+        if (!user.isBroadcaster){
+            broadcaster = getUserBroadcaster(user)
+            if (broadcaster){
+            console.log("Bvid broadcaster",broadcaster.username)
+            server.to(broadcaster.id).emit("getBvid", user);
+            }
+        }
+        
+    });
+
+    client.on('gotBvid',(user,videoId,timestamp)=>{
+        console.log(videoId)
+        //server.to(user.id).emit('videoRequest',videoId)
+        timestamp = Number(timestamp+Number(0))
+        console.log(timestamp)
+        server.to(user.id).emit('loadVideoAndTime',videoId,timestamp)
+    })
     
     client.on('broadcaster', () => {
         console.log("Hello world1");

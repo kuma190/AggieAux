@@ -52,6 +52,17 @@ function getRooms(){
     return roomArray
 }
 
+function getUserBroadcaster(user){
+    room = user.room
+    broadcasters = users.filter(user => user.isBroadcaster === true)
+    for(i of broadcasters){
+        if (i.room === room){
+            return i;
+        }
+    }
+    return null;
+}
+
 
 module.exports = {
     userJoin,
@@ -59,5 +70,6 @@ module.exports = {
     userLeave,
     getRoomUsers,
     getRooms,
-    getUsernames
+    getUsernames,
+    getUserBroadcaster
 }
