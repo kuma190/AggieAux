@@ -1,16 +1,19 @@
 const socket = io();
 var tag = document.createElement('script');
+var progressBar = document.getElementById("progress-bar")
 
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0]; 
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var player; 
+var player;
+var videoId = '6h7T_zbPGBw'
+
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
       height: '490',
       width: '600',
-      videoId: '6h7T_zbPGBw',
+      videoId: videoId,
       playerVars: {
         'modestbranding': 1,
         'controls': 0,
@@ -21,14 +24,14 @@ function onYouTubeIframeAPIReady() {
       },
       origin: "http://example.com",
       events: {
-        'onReady': () => initialization(),
+        'onReady': initialization,
 
       }
     });
   }
   
   function initialization() { 
-
+    socket.emit("getBvid")
     $('#play').on('click', () => {
       player.getPlayerState() === 0 ? player.seekTo(0) : null;
       player.playVideo()
@@ -71,6 +74,7 @@ function onYouTubeIframeAPIReady() {
     });
     
       player.seekTo(0);
+      //socket.emit("getBvid")
 
       doUpdate();
 
@@ -112,9 +116,13 @@ function onYouTubeIframeAPIReady() {
   //loadVideoByUrl() requires the following format:
   //http://www.youtube.com/v/VIDEO_ID?version=3
   function youtube_parser(url){
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = url.match(regExp);
-    return (match&&match[7].length==11)? match[7] : false;
+    if (match && match[2].length == 11) {
+      return match[2];
+    } else {
+      return false
+    }
 }
 
   function playVideo() {
@@ -146,8 +154,54 @@ socket.on('seekEvent', (seekValue) => {
 });
 
 socket.on('videoRequest', (vidLink) => {
+  // if (vidLink.length != 11){
+  //   vidLink = youtube_parser(vidLink)
+  // }
   console.log('Load new video');
   player.loadVideoById(vidLink);
   console.log("here");
   console.log(player.getDuration());
+})
+
+socket.on('loadVideoAndTime',(vidLink,timestamp)=>{
+  console.log('loadVideoandtime');
+  if (vidLink.length != 11){
+       vidLink = youtube_parser(vidLink)
+   }
+   //videoId = vidLink
+   //onYouTubeIframeAPIReady()
+   console.log(vidLink,timestamp)
+  player.loadVideoById(vidLink,timestamp)
+  //player.seekTo(timestamp)
+  //progressBar.max = player.getDuration()
+    
+    setTimeout(function(){ 
+      console.log('sleep 500',Number(progressBar.value) + Number(0),player.getDuration()); 
+      //socket.emit('seekEvent',Number(progressBar.value) + Number(0));
+      socket.emit('seekEvent',timestamp+0.5);
+      //socket.emit("seekReady") //this tries to get a timestamp from broadcaster after user video is laoded, but the sync is eh
+  }, 750); 
+  //socket.emit('seekEvent',Number(timestamp) + Number(0));
+
+})
+
+socket.on('getBvid',(user)=>{
+  console.log(user.username)
+  videoUrl = player.getVideoUrl()
+  //timestamp = Number(progressBar.value) + Number (0)
+  timestamp = Number(progressBar.value)+Number(0)
+  console.log(timestamp)
+  console.log(videoUrl)
+  socket.emit("gotBvid",user,videoUrl,timestamp)
+})
+
+//not used unless seekready is called above
+socket.on('seekReady',(user)=>{
+  console.log(user.username)
+  //videoUrl = player.getVideoUrl()
+  //timestamp = Number(progressBar.value) + Number (0)
+  timestamp = Number(progressBar.value) + Number(0)
+  //console.log(timestamp)
+  //console.log(videoUrl)
+  socket.emit("gotSeek",user,timestamp)
 })
